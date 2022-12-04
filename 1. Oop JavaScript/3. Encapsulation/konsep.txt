@@ -1,0 +1,2 @@
+- Encapsulation adalah kondisi dimana attribut atau method pada class dibungkus dan bersifat private.
+- Artinya sebuah Object tidak bisa melihat atau mengubah nilai secara langsung.

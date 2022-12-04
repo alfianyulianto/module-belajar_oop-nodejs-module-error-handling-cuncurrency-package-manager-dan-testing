@@ -1,0 +1,70 @@
+- Object Oriented Programming (OOP) adalah salah satu paradigma pemograman komputer yang dalam pendekatanya berbasis Object, diamana terdapat attribute serta method di dalamnya.
+- Attribute adalah sebuah variabel yang menyimpan nilai.
+- Method adalah fungsi yang digunakan untuk menjalankan proses.
+
+- Untuk lebih mudah memahami apa itu OOP, kita bisa menggunakan pemodelan hal-hal dunia nyata ke dalam program yang kita buat. Ambil contoh Kucing, ia berperan sebagai objek. 
+- Kita ibaratkan ada seekor kucing yang memiliki karakteristik bulu berwarna kuning, panjang badan 23 cm, dan juga berat badan 4 kg. Kucing tersebut juga memiliki kemampuan khusus yaitu mampu berlari, melompat, dan juga tidur.
+- Nah, dalam konteks OOP, karakteristik kucing (warna bulu, tinggi badan, dan berat badan) merupakan atribut dari suatu objek kucing, ia adalah nilai-nilai yang dimiliki oleh seekor kucing. Sedangkan kemampuan (berlari, melompat, tidur) adalah method dari seekor kucing, ia adalah suatu aktivitas yang bisa dilakukan oleh seekor kucing.
+
+- Sebelumnya kita sudah mengenal dan mempelajari object yang dapat merepresentasikan sebuah layer data. Jika string dianalogikan sebagai kata (kumpulan karakter), number sebagai angka, dan boolean sebagai pernyataan benar atau salah; maka object dianalogikan sebagai sebuah benda yang lebih kompleks. OOP pun sama, tetapi lebih kompleks lagi karena di dalam paradigma OOP terdapat 4 pilar utama, yaitu "encapsulation, abstraction, inheritance, dan polymorphism".
+
+
+- Class merupakan hal terpenting dalam sebuah OOP, karena class menyimpan informasi dari Object yang di inisialiasasi
+- Jadi dapat dikatakan Object merupakan 'instance' dari class
+- Sedangkan class ialah 'blueprint' atau 'cetakan' dalam mendefinisikan suatu Object
+- Ada 2 cara dalam membuat Class du JavaScript yaitu dengan keyword 'function' (function constructor) dan keyword 'class'
+
+- Keyword 'function'
+	* Dengan menggunakan pendekatan prototype
+		function Mail() {
+		  this.from = 'pengirim@dicoding.com';
+		};
+		 
+		Mail.prototype.sendMessage = function(msg, to) {
+		  console.log(`you send: ${msg} to ${to} from ${this.from}`);
+		};
+
+	* Tanpa pendekatan prototype
+		function Mail(){
+		  this.from = "pengirim@dicoding.com",
+		  this.sendMessage = function(msg, to) {
+		    console.log(`you send: ${msg} to ${to} from ${this.from}`);
+		  } 
+		};
+
+	* Menginisialisasi function
+		const mail1 = new Mail();
+		mail1.sendMessage('hallo', 'penerima@dicoding.com');
+
+	- Cukup berbeda dengan bahasa pemrograman lain pada umumnya, JavaScript memiliki konsep bernama prototype. - Prototype adalah properti internal yang akan selalu ada ketika sebuah objek dibuat. Dari kedua pendekatan tersebut, pemanggilan terhadap properti dapat dilakukan dengan cara yang sama. Namun, penerapan prototype lebih dianjurkan. 
+		// menggunakan prototype
+		const mail = new Mail();
+		mail.hasOwnProperty('sendMessage');
+		// hasilnya = false
+		--------------------------------------------------
+		// tanpa prototype
+		const mail = new Mail();
+		mail.hasOwnProperty('sendMessage');
+		// hasilnya = true
+
+	- Ketika kita meng-instantiate objek-objek lain, objek yang menggunakan prototype tidak meng-copy atribut sendMessage ke setiap objek-objek. Berbeda ketika kita tidak menggunakan prototype, semua attribute di-copy ke setiap objek. Dengan demikian, penggunaan prototype dapat menghemat alokasi memori yang digunakan.
+- Keyword class
+	class Mail {
+    constructor() {
+        this.from = 'pengirim@dicoding.com';
+    }
+ 
+    sendMessage(msg, to) {
+        console.log(`you send: ${msg} to ${to} from ${this.from}`);
+    };
+	}
+	 
+	const mail1 = new Mail();
+	mail1.sendMessage('hallo', 'penerima@dicoding.com');
+	/**
+	output: you send: hallo to penerima@dicoding.com from pengirim@dicoding.com
+	**/
+
+	- Cara kedua pada dasarnya menggunakan prototype, penggunaan sintaksis class pada javascript hanyalah syntactic sugar dari prototype itu sendiri. Demikianlah cara umum yang digunakan untuk menuliskan dan menginstansiasi objek dari sebuah Class.
+
+

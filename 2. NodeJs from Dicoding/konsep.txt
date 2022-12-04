@@ -1,0 +1,32 @@
+- Node Js adalah rountime environment pada JS yang bersifat oper source dan cross-platform.
+- JavaScript sebenarnya menjalankan sebuah V8 yang terdapat di Google Chrome
+- Dengan Node Js memungkinkan kita dapat menjalankan kode JavaScript di luar browser yaitu di Sistem Operasi
+- Node JS menyediakan library/module JavaScript yang membantu menyederhakanan dalam pengembangan aplikasi web
+- Beberapa fitur yang terdapat di dalam Node Js
+	* Asyncronouse dan Even-driven
+		^ Semua API dari Node.js bersifat asynchronous, artinya tidak memblokir proses lain sembari menunggu satu proses selesai. Server Node.js akan melanjutkan ke pemanggilan API berikutnya lalu memanfaatkan mekanisme event notification untuk mendapatkan respon dari panggilan API sebelumnya.
+	* Very Fast
+		^ Node Js sangat cepat karena berjalan di V8 yang merupakan engine dari Google Chrome
+	* Single Threeded but Highly Scalable
+		^ Node Js menggunakan model single threeded. Ini membantu server meresponse secara asyncronouse dan menjadikan serve scalabel dibanding server tradisional yang menggunakan banyak threeded
+
+- Cara membuat project JavaScript dengan Node JS
+	* npm init : untuk menginisialiasai project
+	* selanjutnya Anda akan diberikan beberapa pertanyaan untuk mengisi nilai package name, version, description, dsb. Semua itu merupakan informasi dasar tentang aplikasi yang kita buat.
+	* setelah mengisi seluruh pertanyaan yang diberikan, kita akan diminta untuk melihat dan memverifikasi informasi yang akan disimpan.
+	* jika nilai yang ditampilkan sudah sesuai, tekan tombol enter. Nilai tersebut akan tersimpan dalam berkas package.json. Berkas tersebut digunakan untuk menyimpan informas
+	i aplikasi yang kita buat. Untuk membuat berkas package.json, sebenarnya kita dapat membuatnya sendiri layaknya membuat berkas baru pada umumnya. Namun, cara tersebut bukan pendekatan yang baik. Dalam membuat berkas package.json, sebaiknya gunakan perintah npm init pada Terminal di dalam project yang kita buat.
+
+- Cara menjalankan project dengan Node Js
+	* Pertama, buatlah berkas baru di dalam folder proyek Anda. Caranya, klik kanan pada daftar file yang ada di Visual Studio Code lalu pilih New File. Beri nama berkas sesuai yang Anda masukkan pada package.json (default-nya adalah index.js).
+	* Untuk menjalankan file JavaScript di atas juga cukup mudah, cukup jalankan perintah berikut pada terminal: node index.js
+
+- Run Script
+	* Pada berkas package.json terdapat beberapa object yang penting untuk kita perhatikan, salah satunya adalah object scripts. Secara default object tersebut akan terbentuk ketika package.json dibuat menggunakan perintah init. Nilai default dari scripts adalah seperti ini:
+		"scripts": {
+		    "test": "echo \"Error: no test specified\" && exit 1"
+		  },
+	* Dengan menjalankan script test, artinya kita mengeksekusi kode yang berada di dalam nilai test, yaitu:
+		"echo \"Error: no test specified\" && exit 1"
+	* Pada object scripts biasanya kita menetapkan script yang sering digunakan secara berkala, seperti menjalankan aplikasi (selama proses development), compiling source code ke tahap produksi, atau melakukan testing.
+	* Untuk menetapkan nilai baru pada object scripts, kita tuliskan nama script sebagai properti. Kemudian tuliskan perintah yang akan dieksekusi sebagai nilai dari properti tersebut. Mari kita buat script baru untuk menjalankan kode dari berkas app.js. Pada object scripts, tuliskan nilai baru dengan properti bernama start, kemudian tambahkan perintah untuk mengeksekusi berkas sebagai nilainya:

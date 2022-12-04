@@ -1,0 +1,1 @@
+- Properti adalah attribute dari sebuah object yang dapat berbentu dari beberapa tipe data, bahkan juga berbentuk object maupun fungsi.

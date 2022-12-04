@@ -1,0 +1,23 @@
+- Ketika aplikasi kita sudah banyak menuliskan baris kode program pada sebuah berkas tentu akan terlihat repot ketika terjadi sebuah 'bug'. Maka kita perlu membagi sebuah kode ke dalam beberapa folder sesuai dengan fungsinya
+- Ketika kita membagi kode JavaScript menjadi beberapa berkas, di situlah kita perlu membuat sebuah modul JavaScript. Apa tujuannya? Tak lain adalah untuk menghubungkan berkas JavaScript yang terpisah agar dapat saling digunakan.
+
+Export dan Import
+- Modul bekerja dengan cara exporting dan importing nilai. Baik itu nilai 'variabel', 'fungsi', 'array', 'object', atau 'class' agar bisa digunakan pada berkas JavaScript lain. 
+- Satu berkas JavaScript terdiri dari satu module yang dapat kita export menjadi lebih dari satu nilai.
+- Dalam environment Node.js, gunakan perintah "module.exports" untuk melakukan proses export module. Setiap berkas JavaScript yang berjalan pada Node, memiliki objek module lokal yang memiliki properti exports. Properti tersebut digunakan untuk mendefinisikan nilai apa yang akan diekspor dari berkas tersebut.
+- Lalu bagaimana caranya untuk melakukan import atau menggunakan object yang sudah di-export? Caranya adalah menggunakan method 'require()'.
+
+Export Beberapa Nilai pada Node Js
+- Solusinya adalah kita tetap mengekspor satu nilai, tetapi kita akan memanfaatkan object literals ({ }).
+- Lalu bagaimana cara import kedua nilai tersebut? Kita bisa menggunakan destructuring object untuk mendapatkan nilai yang di-import.
+
+ES6 Module
+- Untuk melakukan export dan import module JavaScript, ada dua cara yang bisa kita gunakan. 
+- Cara pertama yaitu format CommonJS yang berjalan di lingkungan Node.js dan cara kedua melalui sistem modular sistem secara native yang di miliki JavaScript dengan keyword "export default"
+- Lalu untuk mengimpor nilainya kita dapat menggunakan keyword "import … from" seperti berikut ini:
+- Berbeda dengan gaya Node.js, kita gunakan keyword import ketika mendeklarasikan variabel yang di-import. Kita juga menggunakan keyword from untuk menentukan lokasi berkas JavaScript-nya.
+- Sekarang jalankan kode export import module dengan ES6 dan lihat apakah terjadi Error? Jika iya, itu disebabkan karena berkas JavaScript yang kita buat tidak dianggap sebagai module. Saat ini, fitur ES6 module tidak secara default diaktifkan. Pesan eror di atas menyebutkan dua cara bagaimana mengaktifkan ES6 module. Dua cara tersebut adalah menambahkan properti "type" dengan value "module" pada package.json atau dengan mengubah ekstensi .js menjadi .mjs. Mari kita gunakan cara pertama yang lebih sederhana.
+- Kita juga bisa melakukan export banyak nilai di dalan ES6 JS dengan keyword "export{}". Lalu untuk mendapatkan nilai yang diekspor melalui named export, kita gunakan destructuring object.
+
+
+

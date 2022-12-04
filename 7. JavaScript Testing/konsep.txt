@@ -1,0 +1,68 @@
+- sebelum sebuah program dipublikasikan, seharusnya sebuah program harus melalui tahap pengujian terlebih dahulu. 
+- Proses pengujian tersebut digunakan untuk melakukan kontrol kualitas dari kode yang kita tulis, memastikan bahwa software yang akan dipublikasikan ke pengguna minim adanya kecacatan atau bugs. Oleh sebab itu, sebagai seorang pemrogram kita harus melakukan testing saat proses pengembangan perangkat lunak.
+
+- Sebuah proses pengujian perangkat lunak dapat dilakukan secara:
+	1. Manual
+		Proses pengujian secara manual oleh seorang yang ditunjuk sebagai test, atau sebagian pengguna yang memang mendapatkan akses untuk pengujian pre-release. Proses ini biasanya berkaitan dengan usability, accessibility dari sebuah aplikasi.
+	2. Otomatis
+		Proses pengujian secara otomatis dilakukan oleh komputer dengan menuliskan script khusus, biasanya dilakukan oleh software engineer langsung ataupun oleh seorang QA Engineer. Proses ini biasanya berkaitan dengan fungsionalitas dari sebuah aplikasi.
+
+- Dari proses pengujian di atas, jenis-jenis pengujian dalam pengembangan perangkat lunak secara umum dapat dibagi menjadi 4 jenis pengujian, yaitu:
+	1. Static test
+		Memastikan tidak adanya typo (naming convention yang standar) dan memastikan tidak ada error types.
+	2. Unit test
+		Dilakukan untuk memastikan bahwa setiap unit kode yang kita tulis sudah bisa bekerja sesuai harapan. Unit sendiri berarti komponen terkecil yang dapat diuji secara terisolasi dalam perangkat lunak yang kita buat, dapat berupa fungsi bahkan kelas jika kita menggunakan paradigma OOP. Proses ini juga dapat diautomasikan.
+	3. Integration test
+		Memastikan beberapa serangkaian fungsi yang saling ketergantungan satu sama lain berjalan semestinya. Proses pengujian ini dapat dilakukan secara otomatis dengan menuliskan script test.
+	4. End-to-End test
+		Proses pengujian sebuah aplikasi untuk menguji flow dari awal hingga akhir, layaknya seorang user saat menggunakan aplikasi. Memastikan bahwasanya aplikasi berfungsi selayaknya. Biasanya proses ini dapat dilakukan secara otomatis maupun manual oleh tester.
+
+
+Jest
+- Jest merupakan salah satu framework testing paling populer untuk menuliskan kode pengujian pada bahasa pemrograman JavaScript. Jest dapat digunakan untuk menuliskan script testing pada aplikasi backend maupun frontend.
+
+Langkah-langkah untuk menuliskan sebuah kode pengujian menggunakan framework jest.
+1. Membuat proyek baru dengan direktori bernama latihantesting.
+2. Setelah masuk ke direktori tersebut, kita dapat melakukan init project kita.
+3. Setelah proyek tersebut diinisialisasi. Selanjutnya kita dapat melakukan instalasi library framework jest.
+4. Setelah proses instalasi selesai, buka proyek di code editor.
+5. Pada file package.json, kita tambahkan script untuk test dengan cara menambahkan baris kode berikut:
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+Penambahan script tersebut digunakan agar kita bisa menjalankan script test yang nanti kita buat menggunakan runner.
+
+
+Menulis Kode Pengujian
+- Koe Pengujian
+	test('deskripsi dari testcase kamu', () => {
+	    expect(perintah).matcher(nilai yang diekspektasikan);
+	});
+	// contoh
+	test('dua tambah dua adalah empat', () => {
+	    expect(2+2).toBe(4);
+	});
+- Dari contoh kode di atas expect(2 + 2) merupakan segmen yang berisi perintah yang menghasilkan nilai balikan, perintah tersebut dapat berupa fungsi ataupun perintah langsung.
+- toBe(4) disebut dengan matcher, berisi nilai yang diharapkan dari sebuah perintah yang dilakukan sebelumnya. Dalam jest sendiri terdapat berbagai matchers yang dapat digunakan, misalkan:
+-------------------------------------------------------------------------
+| toBe(x)		| bahwa nilai ekspektasi yang diharapkan adalah x 		|
+| toEqual(x)	| bahwa nilai ekspektasi yang diharapkan sama dengan x  |
+| toBeNull()	| bahwa nilai ekspektasi yang diharapkan adalah null	|
+| toBeTruthy()	| bahwa nilai ekspektasi yang diharapkan adalah truth	|
+| toBeFalsy()	| bahwa nilai ekspektasi yang diharapkan adalah false	|
+-------------------------------------------------------------------------
+
+- Selain matchers di atas, Anda juga dapat melihat matcher lain yang dapat digunakan di sini https://jestjs.io/docs/using-matchers.
+
+- Pada framework jest, kita juga dapat menuliskan sebuah test secara grouping berdasarkan karakteristik ataupun grup yang sama menggunakan segmen describe , misalkan sebagai berikut:
+	describe('pengujian olah aritmatika', () => {
+	   test('#1 dua tambah dua adalah empat', () => {
+	        expect(2+2).toBe(4);
+	   });
+	 
+	   test('#2 dua kali tiga adalah enam', () => {
+	        expect(2*3).toBe(6);
+	   });
+	});

@@ -1,0 +1,22 @@
+- Try and Catch berfungsi untuk menangani error
+	try {
+    // kode
+	} catch (error) {
+	    // error handling
+	}
+- Taruh kode yang berpeluang menimbulkan eror di dalam blok try. Apabila terjadi eror di dalam blok kode try, maka ia akan ditangkap dan ditangani oleh blok kode catch. Sementara, jika tidak terjadi eror pada kode, maka blok catch akan diabaikan.
+- Kode di dalam blok try di atas tidak akan menghasilkan eror, sehingga kode di dalam blok catch akan diabaikan dan tidak dijalankan. 
+- Sekarang perhatikan blok catch. Di sana catch memiliki satu parameter bernama error (nama variabel bisa diubah). Variabel error tersebut merupakan sebuah object yang menyimpan detail informasi dari error yang terjadi. Object error memiliki beberapa properti utama di dalamnya, yaitu:
+	^ name : Nama error yang terjadi.
+	^ message : Pesan tentang detail error.
+	^ stack : Informasi urutan kejadian yang menyebabkan error. Umumnya digunakan untuk debugging karena terdapat informasi baris mana yang menyebabkan error.
+
+try-catch-finally
+- Selain try dan catch, ada satu blok lagi yang ada dalam mekanisme error handling pada JavaScript, yaitu finally. Blok finally akan tetap dijalankan tanpa peduli apa pun hasil yang terjadi pada blok try-catch.
+
+
+Trowing Error
+- throw digunakan untuk melemparkan sebuah error ke block catch
+
+Custome Error
+- Seringkali kita membutuhkan kelas eror sendiri untuk menunjukkan kesalahan yang spesifik dan tidak tersedia dalam kelas Error bawaan dari JavaScript.

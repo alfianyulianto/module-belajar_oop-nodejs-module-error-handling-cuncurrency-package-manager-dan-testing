@@ -1,0 +1,138 @@
+- Concurrency artinya beberapa komputasi yang terjadi secara bersamaan.
+- Sebelum membahas concurrency lebih jauh kita harus bisa membedakan antaran asynchronouse dan synchronouse.
+
+- Synchronouse artinya baris kode dijalankan sesuai dengan urutannya.
+- Artinya jika kita punya dua baris kode, maka baris kode kedua tidak akan dijalankan sebelum baris kode pertama selesai dijalankan.
+- Kita bisa bayangkan ini dalam kehidupan nyata ketika mengantri membeli kopi di sebuah kedai kopi. Kita tidak akan dilayani sebelum semua antrian di depan kita selesai dilayani, begitu pula orang di belakang kita pun harus menunggu gilirannya.
+
+- Dengan asynchronouse program, jika kita memiliki dua baris program, kita dapat membuat baris kedua dapat dieksekusi terlebih dahulu tanpa menunggu baris satu selesai dieksekusi.
+- Dalam dunia nyata kita bisa membayangkan dengan memesan kopi, tetapi pemesanannya melalui pelayan. Sembari menunggu pesannya datang, kita dapat melakukan aktivitas lain seperti membuka laptop, menulis, hingga kopi itu datang dengan sendirinya.
+- Program asynchronous memungkinkan suatu operasi bisa berjalan sembari menunggu operasi lainnya selesai. Umumnya kita memanfaatkan asynchronous pada operasi yang besar dan membutuhkan waktu lama, seperti mengambil data dari internet atau API, menyimpan data ke database, dan membaca data dari sebuah berkas.
+
+- Urutan di mana seseorang mendapatkan minumannya terlebih dahulu memiliki korelasi dengan kapan ia memesan makanannya. Namun bukan hanya itu, faktor ini juga dipengaruhi dengan minuman apa yang ia pesan. Contohnya jika kita memesan kopi espresso sedangkan teman kita hanya memesan air mineral. Walaupun kita memesannya terlebih dahulu, tiada jaminan kita akan mendapatkannya duluan. Membuat espresso tentu akan membutuhkan waktu lebih lama dibandingkan dengan menuangkan air mineral pada gelas, kan?
+
+
+setTimeout
+- Fungsi setTimeout merupakan cara yang paling mudah membuat program kita berjalan secara asynchronouse
+- Fungsi ini menerima dua buah parameter. Parameter pertama adalah fungsi yang akan dijalankan secara asynchronous. Kedua adalah nilai number dalam milisecond sebagai nilai tunggu sebelum fungsi dijalankan.
+
+
+callback function
+- Hal yang paling membingungkan ketika kita berkerja dengan synchronouse dan asynchronouse adalah ketika kita mendapatkan nilai dengan cara asynchronouse dari program yang berjalank synchronouse.
+- Apa itu callback function? Mari kita bayangkan kembali ketika memesan kopi. Pada kasus ini mungkin terdapat dua aksi yang bisa kita lakukan:
+	1. (Synchronous) Kita tetap menunggu di kasir sampai kopi datang.
+	2. (Asynchronous) Kita menunggu di meja setelah memesan kopi. Selanjutnya kopi akan diantarkan oleh pelayan. Sehingga, kita tidak perlu menunggu di kasir dan dapat melakukan pekerjaan lain.
+-  Pelayan ini berperan layaknya callback function. Ia diperintahkan pada sebuah fungsi asynchronous kemudian akan dipanggil/digunakan ketika tugas itu selesai
+- Jadi callback function adalah sebuah cara untuk mendapartkan nilai secara asynchronouse.
+
+
+callback hell
+-  Callback hell terjadi letika proses yang saling bergantung satu sama lain? Contohnya, untuk membuat kue tahapan yang perlu kita lakukan adalah:
+	1. Menyiapkan bahan
+	2. Membuat adonan
+	3. Memasukkan adonan ke cetakan
+	4. Memanggang adonan
+- Tahapan tersebut sangat bergantung satu sama lain. Kita tidak bisa mencetak adonan sebelum menyiapkan bahan dan membuat adonan. Jika seluruh tahapan tersebut berjalan secara synchronous, mungkin kita bisa melakukannya seperti ini:
+function makeACake(...rawIngredients) {
+    const ingredients = collectIngredients(rawIngredients);
+    dough = makeTheDough(ingredients);
+    pouredDough = pourDough(dough);
+    cake = bakeACake(pouredDough);
+    console.log(cake);
+}
+- Namun, jika fungsi-fungsi tersebut berjalan secara asynchronous, maka kita akan membuat yang namanya callback hell. Callback hell terjadi karena banyak sekali callback function yang bersarang karena saling membutuhkan satu sama lain. Sehingga, kode akan tampak seperti ini:
+function makeACake(...rawIngredients) {
+    collectIngredients(rawIngredients, function(ingredients) {
+        makeTheDough(ingredients, function(dough) {
+            pourDough(dough, function(pouredDough) {
+                bakeACake(pouredDough, function(cake) {
+                    console.log(cake);
+                })
+            })
+        })
+    });
+}
+- Melihat kode seperti ini saja membuat kepala jadi pusing. Lantas apa solusi agar kita dapat menghindari callback hell? Salah satunya adalah dengan menggunakan Promise.
+function makeACake(...rawIngredients) {
+    collectIngredients(rawIngredients)
+        .then(makeTheDough)
+        .then(pourDough)
+        .then(bakeACake)
+        .then(console.log);
+}
+
+
+promise
+- Promise dapat menggantikan peran 'callback' dengan menggunakan ciri khas '.then'.
+- Fitur ini seperti namanya yaitu untuk membuat janji
+- Promise memiliki 3 kondisi
+	^ Pending (janji sedang dalam proses)
+	^ Fulfilled (janji terpenuhi)
+	^ Rejected (janji gagal)
+- Untuk membuat promise kita guanakan keyword 'new Promise()'
+- Didalam cunstructor object Promise terdapat 2 parameter yaitu 'resolve' dan 'rejected'
+	^ Resolve - fungsi ini dapat menerima satu parameter. Bisanny digunakan untuk mengirimkan data ketika Promise berhasi dilakukan
+	^ Rejected - fungsi yang dapat menerima satu parameter dan digunakan untuk memberi alasan kenapa Promise tidak dapat terpenuhi. ika fungsi ini terpanggil, kondisi Promise akan berubah dari 'pending' menjadi 'rejected'.
+- Output yang dihasilkan baik ketika fulfilled ataupun rejected masih berupa Promise, bukan nilai yang dibawa oleh fungsi resolve atau reject. Lantas bagaimana kita bisa mengakses nilai yang dibawa oleh fungsi-fungsi tersebut? Caranya adalah menggunakan method '.then()' yang tersedia pada objek Promise.
+
+
+cunsuming promises
+- Seperti yang telah kita bahas sebelumnya, status awal dari Promise adalah pending. Kemudian, akan ada dua kemungkinan yang terjadi, fulfilled atau rejected.
+- Untuk menangani hasil dari Promise, kita gunakan method .then(). Jika kita terjemahkan, “then” berarti “kemudian”, sehingga kurang lebih kita memerintahkan JavaScript seperti ini: “Jika janji saya sudah selesai, kemudian lakukan ...”. Jika dituliskan dalam bentuk kode akan seperti berikut:
+	const myPromise = new Promise(executorFunction);
+	myPromise.then(onFullfilled, onRejected);
+- .then() sendiri adalah sebuah higher-order function yang membutuhkan dua parameter. Keduanya adalah callback function yang juga dikenal sebagai handler. Handler pertama adalah fungsi yang akan dijalankan ketika Promise berstatus resolve. Sedangkan handler kedua adalah fungsi yang akan dijalankan ketika Promise berstatus reject.
+
+
+onRejected with Catch Method
+- Perlu diketahui bahwa method .then() akan mengembalikan nilai promise yang sama dengan ketika objek promise itu dipanggil. Melalui sifatnya ini, daripada kita menetapkan logika resolve dan reject pada satu method then(), kita dapat memisahkan kedua logika tersebut menggunakan masing-masing method then() seperti ini:
+checkStock()
+  .then(handleSuccess)
+  .then(null, handleFailure);
+ - Namun untuk menetapkan onRejected handler, kita perlu memberikan nilai null pada parameter pertama method .then(). Hal ini sedikit merepotkan bukan? Solusinya kita dapat menggunakan method lain, yakni .catch().
+ - Method .catch() mirip seperti .then(). Namun, method ini hanya menerima satu parameter function yang digunakan untuk rejected handler. Method catch() ini akan terpanggil ketika objek promise memiliki kondisi onRejected. Berikut contoh penggunaan method .catch():
+ checkStock()
+  .then(handleSuccess)
+  .catch(handleFailure);
+
+
+Chaining Promise
+- Kita sudah tahu buruknya penulisan callback hell. Namun, kita tidak dapat menghindari keadaan di mana proses asynchronous saling bergantung satu sama lain. Untuk menghindari callback hell, salah satu solusinya adalah Promise.
+- Dengan promise kita dapat melakukan proses asynchronous secara berantai. Contohnya, ketika kita ingin membuat satu gelas kopi, akan ada beberapa tahapan yang dikerjakan oleh mesin pembuat kopi, seperti memastikan mesin sudah siap, memastikan stok biji kopi dan air cukup, membuat kopi, lalu menuangkannya ke dalam gelas. Tahapan tersebut harus dilakukan secara berurutan.
+- Untuk memastikan rangkaian promise berjalan dengan sesuai, kita perlu mengembalikan (return) promise selanjutnya. Contohnya adalah seperti ini:
+function makeExpresso(){
+	checkAvalabelity()
+		.then((value)=>{
+			console.log(value);
+			return checkStock(); // memanggil promise lain
+		})
+		.then((value)=>{
+			console.log(value);
+			return brewCoffee(); // memanggil promise lain
+		})
+		.then((value)=>{
+			console.log(value);
+		})
+		.catch((rejectedReason)=>{
+			console.log(rejectedReason);
+		})
+}
+
+
+
+Promise All
+- Method Promise.all() dapat menerima banyak promise dalam bentuk array pada parameternya. Kemudian method tersebut akan mengembalikan nilai seluruh hasil dari promise dalam bentuk array.
+const promises = [firstPromise(), secondPromise(), thirdPromise()];
+Promise.all(promises)
+  .then(resolvedValue => {
+    console.log(resolvedValue);
+  });
+
+
+Async Await
+- Fitur async/await sebenarnya hanya syntactic sugar. Itu berarti secara fungsionalitas bukanlah sebuah fitur baru dalam JavaScript. Namun, hanya gaya penulisan baru yang dikembangkan dari kombinasi penggunaan Promise dan generator. Sehingga, async/await ini tidak dapat digunakan jika tidak ada Promise.
+- Async-await memungkinkan kita menuliskan proses asynchronous layaknya proses synchronous.
+
+
+Handle onRejected using async-await
+- Await hanya akan mengembalikan nilai jika promise berhasil dilakukan (onFulfilled). Lantas bagaimana jika promise gagal dilakukan (onRejected)? Caranya cukup sederhana. Kembali lagi kepada prinsip synchronous code. Kita dapat menangani sebuah eror atau tolakan dengan menggunakan try...catch.
